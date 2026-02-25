@@ -27,7 +27,7 @@ export const options = {
 
 export default function () {
   const res = http.get(`${BASE_URL}/courses?limit=${LIMIT}`, {
-    timeout: "2s",
+    timeout: "1s",
     headers: { Accept: "application/json" },
   });
 
