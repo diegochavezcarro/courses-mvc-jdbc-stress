@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/coursesdb
+    username: appuser
+    password: app_password_123
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 2000
+
+server:
+  port: 8080
