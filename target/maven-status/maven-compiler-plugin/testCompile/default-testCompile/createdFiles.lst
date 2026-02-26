@@ -1,1 +1,8 @@
+com/diegochavez/courses/repository/CourseRepositoryTest.class
+com/diegochavez/courses/service/CourseServiceUnitTest.class
 com/diegochavez/courses/CoursesMvcJdbcApplicationTests.class
+com/diegochavez/courses/controller/CourseControllerValidationTest.class
+com/diegochavez/courses/service/CourseServiceIntegrationTest.class
+com/diegochavez/courses/controller/CourseControllerContractTest.class
+com/diegochavez/courses/controller/CourseControllerErrorContractTest.class
+com/diegochavez/courses/repository/CourseReactiveRepositoryContractTest.class

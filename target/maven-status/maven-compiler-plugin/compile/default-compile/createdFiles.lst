@@ -1,5 +1,13 @@
+com/diegochavez/courses/model/ApiErrorResponse.class
 com/diegochavez/courses/repository/CourseRepository.class
 com/diegochavez/courses/controller/CourseController.class
 com/diegochavez/courses/CoursesMvcJdbcApplication.class
+com/diegochavez/courses/model/CourseListRequest.class
+com/diegochavez/courses/repository/CourseReactiveRepository.class
 com/diegochavez/courses/service/CourseService.class
+com/diegochavez/courses/controller/GlobalExceptionHandler.class
+com/diegochavez/courses/repository/CourseRepositoryAdapter.class
+com/diegochavez/courses/model/ApiErrorCode.class
+com/diegochavez/courses/repository/CourseRowMapper.class
+com/diegochavez/courses/service/CourseQueryService.class
 com/diegochavez/courses/model/Course.class

@@ -17,7 +17,7 @@ import reactor.test.StepVerifier;
 
 class CourseRepositoryTest {
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"null", "unchecked"})
     @Test
     void shouldQueryCoursesWithReactiveClient() {
         DatabaseClient databaseClient = mock(DatabaseClient.class);

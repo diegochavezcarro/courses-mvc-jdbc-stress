@@ -11,5 +11,5 @@
         ".specify/scripts/bash/": true,
         ".specify/scripts/powershell/": true
     },
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

@@ -30,7 +30,7 @@ public class CourseRepository implements CourseReactiveRepository {
     public Flux<Course> findAll(int limit) {
         return databaseClient.sql(FIND_ALL_SQL)
                 .bind(0, limit)
-                .map(courseRowMapper)
+                .map((row, metadata) -> courseRowMapper.apply(row, metadata))
                 .all();
     }
 }

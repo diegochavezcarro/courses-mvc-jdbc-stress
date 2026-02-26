@@ -4,7 +4,9 @@ import com.diegochavez.courses.model.ApiErrorCode;
 import com.diegochavez.courses.model.ApiErrorResponse;
 import jakarta.validation.ConstraintViolationException;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -55,7 +57,7 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ApiErrorResponse> buildError(
-            HttpStatus status,
+            HttpStatusCode status,
             ApiErrorCode code,
             String message,
             ServerWebExchange exchange
@@ -66,6 +68,6 @@ public class GlobalExceptionHandler {
                 OffsetDateTime.now(),
                 exchange.getRequest().getPath().value()
         );
-        return ResponseEntity.status(status).body(response);
+                return ResponseEntity.status(Objects.requireNonNull(status)).body(response);
     }
 }
