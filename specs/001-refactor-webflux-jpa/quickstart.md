@@ -4,9 +4,13 @@
 - Java 21
 - Docker or local PostgreSQL with dataset compatible with existing `courses` table
 - Maven Wrapper (`./mvnw`)
+- Optional for load benchmark: k6 CLI
 
 ## 2) Run the application
 ```bash
+export DB_R2DBC_URL='r2dbc:postgresql://localhost:5432/coursesdb'
+export DB_USERNAME='appuser'
+export DB_PASSWORD='change-me'
 ./mvnw spring-boot:run
 ```
 
@@ -45,6 +49,9 @@ Expected:
 - Context and endpoint tests pass
 - Validation/error-schema assertions pass
 
+Latest local verification:
+- `./mvnw test -q` completed successfully on 2026-02-26
+
 ## 7) Run comparative load benchmark
 Use existing k6 scripts to compare before/after behavior.
 
@@ -55,3 +62,7 @@ BASE_URL=http://localhost:8080 LIMIT=100 MAX_VUS=1000 k6 run --summary-export=su
 Expected:
 - Meets success criteria targets in spec (`SC-001`, `SC-002`)
 - No contract regression in successful responses
+
+Suggested benchmark artifacts to track:
+- `k6/summary-webflux-r2dbc-10l-1000vu.json`
+- `k6/run-webflux-r2dbc-10l-1000vu.txt`

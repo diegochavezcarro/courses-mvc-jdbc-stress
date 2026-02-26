@@ -41,3 +41,9 @@
 - Alternatives considered:
   - Unit tests only: rejected because endpoint contract and runtime behavior under load are key outcomes.
   - Load tests only: rejected because they do not prove validation and error-schema correctness.
+
+## Maintainability extension points (US3)
+- Keep controller dependence on `CourseQueryService` interface to isolate transport concerns.
+- Keep persistence exposed through `CourseReactiveRepository` contract and adapter delegation
+  (`CourseRepositoryAdapter`) so internals can evolve without controller/service rewiring.
+- Preserve standardized error model (`ApiErrorResponse`) as stable API boundary for all failure paths.

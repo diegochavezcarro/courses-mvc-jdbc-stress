@@ -1,6 +1,10 @@
 # Maven / Java build output
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+/build/
+/.gradle/
+*.class
+*.jar
 
 # IntelliJ IDEA
 /.idea/

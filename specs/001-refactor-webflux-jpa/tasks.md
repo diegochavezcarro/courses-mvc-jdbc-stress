@@ -13,9 +13,9 @@
 
 **Purpose**: Prepare project dependencies and base runtime configuration for reactive stack migration.
 
-- [ ] T001 Update reactive dependencies in `/pom.xml` (add WebFlux, Spring Data R2DBC, R2DBC PostgreSQL; remove blocking web/jdbc starters)
-- [ ] T002 Configure reactive PostgreSQL connection settings in `/src/main/resources/application.yml`
-- [ ] T003 [P] Add test dependencies and plugins needed for reactive endpoint/integration tests in `/pom.xml`
+- [x] T001 Update reactive dependencies in `/pom.xml` (add WebFlux, Spring Data R2DBC, R2DBC PostgreSQL; remove blocking web/jdbc starters)
+- [x] T002 Configure reactive PostgreSQL connection settings in `/src/main/resources/application.yml`
+- [x] T003 [P] Add test dependencies and plugins needed for reactive endpoint/integration tests in `/pom.xml`
 
 ---
 
@@ -23,12 +23,12 @@
 
 **Purpose**: Implement shared primitives required by all stories before endpoint behavior work.
 
-- [ ] T004 Create standardized API error payload record in `/src/main/java/com/diegochavez/courses/model/ApiErrorResponse.java`
-- [ ] T005 [P] Create error code enum/constants for API failures in `/src/main/java/com/diegochavez/courses/model/ApiErrorCode.java`
-- [ ] T006 Create global exception handler for validation/unexpected errors in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
-- [ ] T007 [P] Add reactive database row mapping support for `Course` in `/src/main/java/com/diegochavez/courses/repository/CourseRowMapper.java`
-- [ ] T008 Create validated request model for course list limit constraints in `/src/main/java/com/diegochavez/courses/model/CourseListRequest.java`
-- [ ] T009 Introduce reactive repository contract for course queries in `/src/main/java/com/diegochavez/courses/repository/CourseReactiveRepository.java`
+- [x] T004 Create standardized API error payload record in `/src/main/java/com/diegochavez/courses/model/ApiErrorResponse.java`
+- [x] T005 [P] Create error code enum/constants for API failures in `/src/main/java/com/diegochavez/courses/model/ApiErrorCode.java`
+- [x] T006 Create global exception handler for validation/unexpected errors in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
+- [x] T007 [P] Add reactive database row mapping support for `Course` in `/src/main/java/com/diegochavez/courses/repository/CourseRowMapper.java`
+- [x] T008 Create validated request model for course list limit constraints in `/src/main/java/com/diegochavez/courses/model/CourseListRequest.java`
+- [x] T009 Introduce reactive repository contract for course queries in `/src/main/java/com/diegochavez/courses/repository/CourseReactiveRepository.java`
 
 **Checkpoint**: Shared reactive and error-handling foundations are complete.
 
@@ -42,16 +42,16 @@
 
 ### Tests for User Story 1
 
-- [ ] T010 [P] [US1] Add contract test for `GET /courses` success payload shape in `/src/test/java/com/diegochavez/courses/controller/CourseControllerContractTest.java`
-- [ ] T011 [P] [US1] Add integration test for deterministic ordering and limit handling in `/src/test/java/com/diegochavez/courses/service/CourseServiceIntegrationTest.java`
+- [x] T010 [P] [US1] Add contract test for `GET /courses` success payload shape in `/src/test/java/com/diegochavez/courses/controller/CourseControllerContractTest.java`
+- [x] T011 [P] [US1] Add integration test for deterministic ordering and limit handling in `/src/test/java/com/diegochavez/courses/service/CourseServiceIntegrationTest.java`
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Replace blocking repository implementation with reactive data access in `/src/main/java/com/diegochavez/courses/repository/CourseRepository.java`
-- [ ] T013 [US1] Refactor service to reactive return types and orchestration in `/src/main/java/com/diegochavez/courses/service/CourseService.java`
-- [ ] T014 [US1] Refactor controller endpoint to WebFlux handler preserving existing API contract in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
-- [ ] T015 [US1] Ensure default `limit=100` behavior and response compatibility in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
-- [ ] T016 [US1] Add repository-level query test coverage for reactive limit behavior in `/src/test/java/com/diegochavez/courses/repository/CourseRepositoryTest.java`
+- [x] T012 [US1] Replace blocking repository implementation with reactive data access in `/src/main/java/com/diegochavez/courses/repository/CourseRepository.java`
+- [x] T013 [US1] Refactor service to reactive return types and orchestration in `/src/main/java/com/diegochavez/courses/service/CourseService.java`
+- [x] T014 [US1] Refactor controller endpoint to WebFlux handler preserving existing API contract in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
+- [x] T015 [US1] Ensure default `limit=100` behavior and response compatibility in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
+- [x] T016 [US1] Add repository-level query test coverage for reactive limit behavior in `/src/test/java/com/diegochavez/courses/repository/CourseRepositoryTest.java`
 
 **Checkpoint**: US1 is independently functional and benchmarkable.
 
@@ -65,16 +65,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T017 [P] [US2] Add controller validation test for `limit <= 0` in `/src/test/java/com/diegochavez/courses/controller/CourseControllerValidationTest.java`
-- [ ] T018 [P] [US2] Add controller validation test for `limit > 1000` in `/src/test/java/com/diegochavez/courses/controller/CourseControllerValidationTest.java`
-- [ ] T019 [P] [US2] Add error-schema contract test for unexpected failures in `/src/test/java/com/diegochavez/courses/controller/CourseControllerErrorContractTest.java`
+- [x] T017 [P] [US2] Add controller validation test for `limit <= 0` in `/src/test/java/com/diegochavez/courses/controller/CourseControllerValidationTest.java`
+- [x] T018 [P] [US2] Add controller validation test for `limit > 1000` in `/src/test/java/com/diegochavez/courses/controller/CourseControllerValidationTest.java`
+- [x] T019 [P] [US2] Add error-schema contract test for unexpected failures in `/src/test/java/com/diegochavez/courses/controller/CourseControllerErrorContractTest.java`
 
 ### Implementation for User Story 2
 
-- [ ] T020 [US2] Add endpoint-level validation annotations and constraints for `limit` in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
-- [ ] T021 [US2] Implement validation error mapping to standardized payload in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
-- [ ] T022 [US2] Implement unexpected error mapping to standardized payload in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
-- [ ] T023 [US2] Ensure all error responses include `code`, `message`, `timestamp`, `path` in `/src/main/java/com/diegochavez/courses/model/ApiErrorResponse.java`
+- [x] T020 [US2] Add endpoint-level validation annotations and constraints for `limit` in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
+- [x] T021 [US2] Implement validation error mapping to standardized payload in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
+- [x] T022 [US2] Implement unexpected error mapping to standardized payload in `/src/main/java/com/diegochavez/courses/controller/GlobalExceptionHandler.java`
+- [x] T023 [US2] Ensure all error responses include `code`, `message`, `timestamp`, `path` in `/src/main/java/com/diegochavez/courses/model/ApiErrorResponse.java`
 
 **Checkpoint**: US2 is independently testable with deterministic validation/error behavior.
 
@@ -88,16 +88,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T024 [P] [US3] Add service unit tests for orchestration boundaries in `/src/test/java/com/diegochavez/courses/service/CourseServiceUnitTest.java`
-- [ ] T025 [P] [US3] Add repository contract test for reactive query abstraction in `/src/test/java/com/diegochavez/courses/repository/CourseReactiveRepositoryContractTest.java`
+- [x] T024 [P] [US3] Add service unit tests for orchestration boundaries in `/src/test/java/com/diegochavez/courses/service/CourseServiceUnitTest.java`
+- [x] T025 [P] [US3] Add repository contract test for reactive query abstraction in `/src/test/java/com/diegochavez/courses/repository/CourseReactiveRepositoryContractTest.java`
 
 ### Implementation for User Story 3
 
-- [ ] T026 [US3] Introduce service interface to formalize read-use-case boundary in `/src/main/java/com/diegochavez/courses/service/CourseQueryService.java`
-- [ ] T027 [US3] Update service implementation to implement boundary interface in `/src/main/java/com/diegochavez/courses/service/CourseService.java`
-- [ ] T028 [US3] Decouple controller from concrete service by injecting boundary interface in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
-- [ ] T029 [US3] Add repository adapter class if needed to isolate persistence details in `/src/main/java/com/diegochavez/courses/repository/CourseRepositoryAdapter.java`
-- [ ] T030 [US3] Document maintainability decisions and extension points in `/specs/001-refactor-webflux-jpa/research.md`
+- [x] T026 [US3] Introduce service interface to formalize read-use-case boundary in `/src/main/java/com/diegochavez/courses/service/CourseQueryService.java`
+- [x] T027 [US3] Update service implementation to implement boundary interface in `/src/main/java/com/diegochavez/courses/service/CourseService.java`
+- [x] T028 [US3] Decouple controller from concrete service by injecting boundary interface in `/src/main/java/com/diegochavez/courses/controller/CourseController.java`
+- [x] T029 [US3] Add repository adapter class if needed to isolate persistence details in `/src/main/java/com/diegochavez/courses/repository/CourseRepositoryAdapter.java`
+- [x] T030 [US3] Document maintainability decisions and extension points in `/specs/001-refactor-webflux-jpa/research.md`
 
 **Checkpoint**: US3 provides maintainable boundaries and clearer extensibility.
 
@@ -107,10 +107,10 @@
 
 **Purpose**: Final consistency, performance evidence, and documentation validation across stories.
 
-- [ ] T031 [P] Update quickstart verification steps with final commands/results in `/specs/001-refactor-webflux-jpa/quickstart.md`
-- [ ] T032 Run full test suite and record result notes in `/specs/001-refactor-webflux-jpa/quickstart.md`
+- [x] T031 [P] Update quickstart verification steps with final commands/results in `/specs/001-refactor-webflux-jpa/quickstart.md`
+- [x] T032 Run full test suite and record result notes in `/specs/001-refactor-webflux-jpa/quickstart.md`
 - [ ] T033 [P] Execute comparative k6 benchmark and document summary artifact names in `/specs/001-refactor-webflux-jpa/quickstart.md`
-- [ ] T034 Final dependency/config cleanup for removed blocking stack items in `/pom.xml`
+- [x] T034 Final dependency/config cleanup for removed blocking stack items in `/pom.xml`
 
 ---
 

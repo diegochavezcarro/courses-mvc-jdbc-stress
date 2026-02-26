@@ -1,1 +1,8 @@
-/Users/diegochavez/Documents/code/courses-mvc-jdbc/src/test/java/com/diegochavez/courses/CoursesMvcJdbcApplicationTests.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/CoursesMvcJdbcApplicationTests.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/controller/CourseControllerContractTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/controller/CourseControllerErrorContractTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/controller/CourseControllerValidationTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/repository/CourseReactiveRepositoryContractTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/repository/CourseRepositoryTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/service/CourseServiceIntegrationTest.java
+/Users/diegochavez/Documents/code/courses-webflux-jpa/src/test/java/com/diegochavez/courses/service/CourseServiceUnitTest.java

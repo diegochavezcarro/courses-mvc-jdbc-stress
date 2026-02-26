@@ -1,14 +1,15 @@
 package com.diegochavez.courses.repository;
 
 import com.diegochavez.courses.model.Course;
-import java.time.OffsetDateTime;
-import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import io.r2dbc.spi.Row;
+import io.r2dbc.spi.RowMetadata;
+import java.util.function.BiFunction;
+import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
 @Repository
-public class CourseRepository {
+public class CourseRepository implements CourseReactiveRepository {
 
     private static final String FIND_ALL_SQL = """
             SELECT id, code, title, description, level, duration_h, active, created_at
@@ -17,23 +18,19 @@ public class CourseRepository {
             LIMIT ?
             """;
 
-    private final JdbcTemplate jdbcTemplate;
-    private final RowMapper<Course> courseRowMapper = (rs, rowNum) -> new Course(
-            rs.getLong("id"),
-            rs.getString("code"),
-            rs.getString("title"),
-            rs.getString("description"),
-            rs.getString("level"),
-            rs.getObject("duration_h", Integer.class),
-            rs.getObject("active", Boolean.class),
-            rs.getObject("created_at", OffsetDateTime.class)
-    );
+    private final DatabaseClient databaseClient;
+    private final BiFunction<Row, RowMetadata, Course> courseRowMapper;
 
-    public CourseRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public CourseRepository(DatabaseClient databaseClient, CourseRowMapper courseRowMapper) {
+        this.databaseClient = databaseClient;
+        this.courseRowMapper = courseRowMapper;
     }
 
-    public List<Course> findAll(int limit) {
-        return jdbcTemplate.query(FIND_ALL_SQL, courseRowMapper, limit);
+    @Override
+    public Flux<Course> findAll(int limit) {
+        return databaseClient.sql(FIND_ALL_SQL)
+                .bind(0, limit)
+                .map(courseRowMapper)
+                .all();
     }
 }

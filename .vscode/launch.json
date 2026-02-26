@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CoursesMvcJdbcApplication<courses-mvc-jdbc>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.diegochavez.courses.CoursesMvcJdbcApplication",
+            "projectName": "courses-mvc-jdbc",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
