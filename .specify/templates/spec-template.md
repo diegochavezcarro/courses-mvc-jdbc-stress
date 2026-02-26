@@ -100,6 +100,17 @@
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
+## Constitution Alignment *(mandatory)*
+
+- **Skills Standard Alignment**: [Describe how the solution follows `skills/backend/SKILL.md`.
+  If any rule cannot be followed, explain why and proposed mitigation.]
+- **Architecture and Integrity Controls**: [State API validation approach,
+  transaction boundary expectations, and exception handling strategy.]
+- **Decision Log**: [Record key technical decisions and trade-offs with concise
+  rationale so plan and implementation remain traceable.]
+- **Commit Strategy**: [Describe how implementation work will be split into
+  focused, reviewable commits.]
+
 ## Success Criteria *(mandatory)*
 
 <!--

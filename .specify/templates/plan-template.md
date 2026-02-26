@@ -31,7 +31,14 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Skills-first compliance confirmed against `skills/backend/SKILL.md` (MUST pass).
+- Stack baseline confirmed: Spring Boot 3.x + Java 21+ patterns only (MUST pass).
+- API correctness controls identified: validation, transaction boundaries,
+  and centralized exception handling (MUST pass).
+- Test strategy and performance evidence defined for behavior/non-functional
+  claims (MUST pass).
+- Decision traceability captured in this plan and companion spec; implementation
+  work split into focused commit slices (MUST pass).
 
 ## Project Structure
 

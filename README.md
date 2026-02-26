@@ -1,5 +1,11 @@
 # courses-mvc-jdbc
 
+## Engineering Standards
+
+- Repository constitution: `.specify/memory/constitution.md`
+- Primary engineering standard: `skills/backend/SKILL.md`
+- Keep commits focused and document key decisions in spec/plan artifacts.
+
     
 ## Comandos
 
