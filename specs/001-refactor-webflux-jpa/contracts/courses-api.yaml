@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: Courses API Contract
+  version: 1.0.0
+  description: Contract for the `/courses` endpoint during WebFlux + reactive persistence refactor.
+paths:
+  /courses:
+    get:
+      summary: Get courses
+      operationId: getCourses
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 100
+            minimum: 1
+            maximum: 1000
+          description: Maximum number of courses to return.
+      responses:
+        '200':
+          description: Course list returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '400':
+          description: Validation error for invalid query parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        '500':
+          description: Unexpected server error with sanitized payload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    Course:
+      type: object
+      required: [id, code, title, level, active, createdAt]
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        level:
+          type: string
+        durationH:
+          type: integer
+          nullable: true
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    ApiErrorResponse:
+      type: object
+      required: [code, message, timestamp, path]
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        path:
+          type: string
