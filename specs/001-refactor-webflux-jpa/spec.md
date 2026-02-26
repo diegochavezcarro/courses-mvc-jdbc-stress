@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Create the specs to refactor this repository (courses-webflux-jpa) to use Spring WebFlux + JPA correctly and idiomatically, following the file `skills/backend/SKILL.md`"
 
+## Clarifications
+
+### Session 2026-02-26
+
+- Q: Which persistence strategy should be used with WebFlux? → A: Migrate persistence to native reactive repositories (R2DBC) instead of using blocking JPA in reactive flows.
+- Q: What API compatibility level is required during the refactor? → A: Strict compatibility; keep current endpoint, parameters, and response shape unchanged.
+- Q: How should oversized `limit` values be handled? → A: Enforce a fixed maximum limit and return a validation error when requests exceed it.
+- Q: What should the fixed maximum `limit` value be? → A: 1000.
+- Q: What standardized error response format should be used? → A: Minimal stable format with `code`, `message`, `timestamp`, and `path`.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Reliable Course Retrieval Under Load (Priority: P1)
@@ -77,11 +87,14 @@ request handling and data access behavior.
 - Requests with `limit=0` or negative values return a clear validation error and
   do not trigger unnecessary data access.
 - Requests with very large limits use bounded behavior that prevents service
-  instability while returning predictable output.
+  instability by enforcing a fixed maximum and returning a validation error if
+  exceeded.
 - When no courses exist, the API returns a successful empty result rather than
   an error.
 - Transient persistence-layer failures surface a stable, sanitized error shape
   and do not leak internal stack traces.
+- Validation and unexpected errors both return the same minimal stable schema
+  with `code`, `message`, `timestamp`, and `path`.
 - Concurrent reads during heavy load preserve consistent response structure and
   ordering guarantees defined by the API contract.
 
@@ -91,14 +104,26 @@ request handling and data access behavior.
 
 - **FR-001**: The system MUST provide course-list retrieval behavior that remains
   functionally consistent under both normal and high-concurrency usage.
+- **FR-001a**: The system MUST preserve strict backward compatibility for the
+  current course-list API contract (endpoint path, parameters, and response
+  shape) during the refactor.
 - **FR-002**: The system MUST validate request inputs at API boundaries before
   processing and return explicit client-facing validation messages.
+- **FR-002a**: The system MUST enforce a fixed maximum value for `limit` and
+  return a standardized validation error when the requested value exceeds that
+  maximum.
+- **FR-002b**: The fixed maximum value for `limit` MUST be 1000.
 - **FR-003**: The system MUST return standardized, sanitized error responses for
   both expected validation failures and unexpected runtime failures.
+- **FR-003a**: Standardized error responses MUST include the fields `code`,
+  `message`, `timestamp`, and `path` for both validation and unexpected errors.
 - **FR-004**: The system MUST define clear request-handling and data-access
   responsibilities so that each layer can be evolved independently.
 - **FR-005**: The system MUST preserve data-access correctness for read
   operations, including deterministic handling of limits and empty-result cases.
+- **FR-005a**: The system MUST use native reactive persistence access for
+  request paths under WebFlux and MUST NOT rely on blocking JPA calls in the
+  reactive execution path.
 - **FR-006**: The system MUST provide test coverage that verifies primary user
   flows and critical edge cases for retrieval and error handling.
 - **FR-007**: The feature artifacts MUST document key design decisions and
@@ -113,20 +138,22 @@ request handling and data access behavior.
 - **CourseListRequest**: Represents consumer-provided retrieval parameters,
   especially pagination/limit constraints that require validation.
 - **ApiErrorResponse**: Represents the standardized client-facing error payload
-  for validation and runtime failures.
+  for validation and runtime failures, including `code`, `message`,
+  `timestamp`, and `path`.
 
 ## Constitution Alignment *(mandatory)*
 
 - **Skills Standard Alignment**: The feature follows `skills/backend/SKILL.md`
-  as the primary engineering standard. 
-  .
+  as the primary engineering standard.
 - **Architecture and Integrity Controls**: API-boundary validation,
   transaction-safety expectations for multi-step operations, and centralized
   sanitized error handling are mandatory outcomes.
 - **Decision Log**:
   1. Prioritize consumer-visible correctness and stable behavior under load.
   2. Enforce explicit validation/error contracts to reduce ambiguity.
-  3. Preserve maintainable boundaries to support future feature growth.
+  3. Use native reactive persistence (R2DBC) for WebFlux request paths instead
+     of wrapping blocking JPA interactions.
+  4. Preserve maintainable boundaries to support future feature growth.
 - **Commit Strategy**: Work will be split into focused commit slices for
   (a) boundary/contract updates, (b) data-flow refactor, (c) test alignment,
   and (d) documentation and decision traceability.
@@ -135,6 +162,8 @@ request handling and data access behavior.
 
 - Existing API consumers rely on current endpoint shape and require backward
   compatible behavior unless explicitly approved otherwise.
+- The refactor does not introduce breaking API contract changes; internal
+  migration is transparent to existing clients.
 - Existing performance scripts and baseline outputs are valid references for
   before/after comparison.
 - The refactor scope is limited to request handling, persistence interaction,
@@ -150,6 +179,12 @@ request handling and data access behavior.
   sustained benchmark runs without functional response regressions.
 - **SC-003**: 100% of invalid-input scenarios defined in this spec return
   standardized client-facing validation responses.
+- **SC-003c**: 100% of validation and unexpected-error responses in targeted
+  tests conform to the `code`/`message`/`timestamp`/`path` schema.
+- **SC-003a**: 100% of requests with `limit` above the configured maximum return
+  the expected validation response and do not execute normal retrieval flow.
+- **SC-003b**: 100% of requests with `limit > 1000` return the expected
+  validation response.
 - **SC-004**: 100% of targeted acceptance scenarios for P1 and P2 pass in
   automated verification.
 - **SC-005**: Maintainers can identify all major migration decisions from spec
