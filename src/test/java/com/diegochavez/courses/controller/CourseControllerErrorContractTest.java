@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 
 import com.diegochavez.courses.service.CourseQueryService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -18,7 +17,6 @@ class CourseControllerErrorContractTest {
 
     private final WebTestClient webTestClient;
 
-    @Autowired
     CourseControllerErrorContractTest(WebTestClient webTestClient) {
         this.webTestClient = webTestClient;
     }

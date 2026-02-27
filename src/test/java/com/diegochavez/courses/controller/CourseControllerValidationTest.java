@@ -2,7 +2,6 @@ package com.diegochavez.courses.controller;
 
 import com.diegochavez.courses.service.CourseQueryService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -14,7 +13,6 @@ class CourseControllerValidationTest {
 
     private final WebTestClient webTestClient;
 
-    @Autowired
     CourseControllerValidationTest(WebTestClient webTestClient) {
         this.webTestClient = webTestClient;
     }

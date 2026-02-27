@@ -7,7 +7,6 @@ import com.diegochavez.courses.model.Course;
 import com.diegochavez.courses.service.CourseQueryService;
 import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -20,7 +19,6 @@ class CourseControllerContractTest {
 
     private final WebTestClient webTestClient;
 
-    @Autowired
     CourseControllerContractTest(WebTestClient webTestClient) {
         this.webTestClient = webTestClient;
     }
