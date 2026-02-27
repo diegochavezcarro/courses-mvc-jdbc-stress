@@ -1,4 +1,4 @@
-# courses-mvc-jdbc
+# courses-mvc-jpa
 
 Proyecto de ejemplo para exponer una API de cursos con Spring Boot y persistencia relacional, incluyendo pruebas automatizadas y scripts de carga con k6.
 
