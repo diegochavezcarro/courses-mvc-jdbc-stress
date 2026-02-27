@@ -1,5 +1,11 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
+    "java.import.maven.enabled": true,
+    "java.project.sourcePaths": [
+        "src/main/java",
+        "src/test/java"
+    ],
+    "java.project.outputPath": "target/classes",
     "chat.promptFilesRecommendations": {
         "speckit.constitution": true,
         "speckit.specify": true,
