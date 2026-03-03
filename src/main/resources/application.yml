@@ -4,11 +4,11 @@ spring:
     username: appuser
     password: app_password_123
     hikari:
-      maximum-pool-size: 30
+      maximum-pool-size: 10
       minimum-idle: 10
-      connection-timeout: 300
+      connection-timeout: 30s
   threads:
     virtual:
-      enabled: true
+      enabled: false
 server:
   port: 8080
